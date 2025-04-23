@@ -2,6 +2,7 @@ package model;
 
 
 import java.io.*;
+import java.time.LocalDate;
 import java.util.*;
 
 /**
@@ -11,6 +12,7 @@ public class ActeMariage {
     
     private boolean div;
     private int idActMariage;
+    private LocalDate dateMariage;
     
     Femme Conjointe;
     Homme Conjoint;
@@ -24,11 +26,12 @@ public class ActeMariage {
     
 
 
-	public ActeMariage(boolean d, int idm, Femme cf, Homme ch, Mairie m) {
+	public ActeMariage(boolean d, int idm, Citoyen f, Citoyen h,LocalDate date, Mairie m) {
 		div = d;
 		idActMariage = idm;
-		Conjointe = cf;
-		Conjoint = ch;
+		Conjointe = (Femme) f;
+		Conjoint = (Homme) h;
+		dateMariage=date;
 		mairie = m;
 	}
 	

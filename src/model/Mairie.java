@@ -47,6 +47,12 @@ public class Mairie {
     /**
      * getter and setter
      */
+    
+    public Vector<Citoyen> getCitoyens() {
+        return listCitoyens;  
+    }
+    
+    
     public int getIdMairie() {
         return idMairie;
     }
@@ -70,5 +76,17 @@ public class Mairie {
     public void setAdresse(String adresse) {
         this.adresse = adresse;
     }
+    
+     
+   public  Citoyen recupererById (int id)
+   {
+	   for (Citoyen c : listCitoyens) {
+	        if (c.getId() == id) {
+	            return c;
+	        }
+	    }
+	   return null;
+   }
+    
 
 }

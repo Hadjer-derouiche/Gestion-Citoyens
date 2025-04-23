@@ -3,14 +3,17 @@ package view;
 import javax.swing.*;
 import java.awt.*;
 import model.ActeMariage;
+import model.Mairie;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 public class MariageView extends JFrame {
+	Mairie mairie;
 
-    JTextField jt1, jt2;
+    JTextField jt1, jt2, dateM;
     JButton valider, quitter;
-    JLabel labelTitre, labelHomme, labelFemme, date;
+    JLabel labelTitre, labelHomme, labelFemme, date,datem;
     JPanel mainPanel, formPanel, topPanel, bottomPanel;
     ActeMariage acteMariage;
 
@@ -20,8 +23,10 @@ public class MariageView extends JFrame {
         return maintenant.format(formatter);
     }
 
-    public MariageView(ActeMariage acteMariage) {
-        this.acteMariage = acteMariage;
+
+
+	public MariageView(Mairie m) {
+		mairie =m;
 
         setTitle("Formulaire de Mariage");
         setPreferredSize(new Dimension(550, 350));
@@ -49,16 +54,21 @@ public class MariageView extends JFrame {
 
         labelHomme = new JLabel("ID de marié :");
         labelFemme = new JLabel("ID de la mariée :");
+        datem = new JLabel("Date de mariage");
         labelHomme.setFont(new Font("Arial", Font.BOLD, 14));
         labelFemme.setFont(new Font("Arial", Font.BOLD, 14));
+        datem.setFont(new Font("Arial", Font.BOLD, 14));
 
         jt1 = new JTextField(15);
         jt2 = new JTextField(15);
+        dateM= new JTextField(15);
 
         formPanel.add(labelHomme);
         formPanel.add(jt1);
         formPanel.add(labelFemme);
         formPanel.add(jt2);
+        formPanel.add(datem);
+        formPanel.add(dateM);
 
         bottomPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 20, 10));
         valider = new JButton("Valider");
@@ -83,9 +93,14 @@ public class MariageView extends JFrame {
         getContentPane().add(Box.createRigidArea(new Dimension(0, 30)));
         getContentPane().add(formPanel);
         getContentPane().add(bottomPanel);
+        
+        
+        quitter.addActionListener(e -> dispose());
+        
+        
 
         pack();
         setLocationRelativeTo(null); 
         setVisible(true);
-    }
+	}
 }

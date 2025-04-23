@@ -1,23 +1,29 @@
 package view;
 
 import javax.swing.*;
+
+import controler.SaisiPContrl;
+
 import java.awt.*;
 import model.Citoyen;
+import model.Mairie;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 
 public class SaisiePView extends JFrame {
 	
-	Citoyen personne;
-	JLabel SP= new JLabel ("Saisie une personne ");
+	Mairie mairie;
+	
+ 	JLabel SP= new JLabel ("Saisie une personne ");
 	JLabel date;
-	JTextField nom =new JTextField("Entrez le nom ");
-	JTextField prenom =new JTextField("Entrez le prenom");
-	JTextField dateNaissance =new JTextField("Entrez le nom ");
+	JTextField nom =new JTextField(15);
+	JTextField prenom =new JTextField(15);
+	JTextField dateNaissance =new JTextField(15);
 	ButtonGroup grp = new ButtonGroup();
-	JRadioButton r1 = new JRadioButton("Femme"); 
-	JRadioButton r2 = new JRadioButton("Homme");
+	JRadioButton femme = new JRadioButton("Femme"); 
+	JRadioButton homme = new JRadioButton("Homme");
 	JPanel centerPanel = new JPanel() ;
 	JPanel topPanel = new JPanel() ;
 	JPanel bottomPanel = new JPanel() ;
@@ -32,10 +38,10 @@ public class SaisiePView extends JFrame {
 	        return maintenant.format(formatter);
 	    }
 
-	  public SaisiePView ()
+	  public SaisiePView (Mairie m)
 	  {
-		  
-		  setPreferredSize(new Dimension(600,450));
+		  mairie=m;
+		  setPreferredSize(new Dimension(600,550));
 		  this.getContentPane().setLayout(new BoxLayout(getContentPane(), BoxLayout.Y_AXIS));
 		  
 		  SP.setFont(new Font("Arial", Font.BOLD, 18));
@@ -48,20 +54,22 @@ public class SaisiePView extends JFrame {
 		  topPanel.add(date);
 		  topPanel.add(Box.createHorizontalGlue()); 
 		  
-		  
-		  r2.setSelected(true);
-		  grp.add(r1);
-		  grp.add(r2);
-		  centerPanel.setLayout(new GridLayout (3,2, 10, 20));
+		 
+		  grp.add(femme);
+		  grp.add(homme);
+		  centerPanel.setLayout(new GridLayout (4,2, 10, 20));
 		  centerPanel.setBorder(BorderFactory.createEmptyBorder(30, 50, 30, 50));
 		  centerPanel.add(new JLabel("Nom : "));
 		  centerPanel.add(nom);
 		  centerPanel.add(new JLabel("Prenomom : "));
 		  centerPanel.add(prenom);
+		  centerPanel.add(new JLabel("Date de naissance : "));
+		  centerPanel.add(dateNaissance);
+
 		  centerPanel.add(new JLabel("Sexe : "));
 		  JPanel sexePanel = new JPanel();
-		  sexePanel.add(r1);
-		  sexePanel.add(r2);
+		  sexePanel.add(femme);
+		  sexePanel.add(homme);
 		  centerPanel.add(sexePanel);
 		  
 		  for (Component comp : centerPanel.getComponents()) {
@@ -89,6 +97,13 @@ public class SaisiePView extends JFrame {
 			getContentPane().add(Box.createRigidArea(new Dimension(0, 50))); 
 			getContentPane().add(bottomPanel);
 		  
+			
+			
+			quitter.addActionListener(e -> dispose());
+		    
+			SaisiPContrl c= new SaisiPContrl(mairie,nom, prenom,dateNaissance, femme, homme);
+			ajouter.addActionListener(c);
+		
 
 			 this.show();
 			 this.pack();

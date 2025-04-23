@@ -7,6 +7,7 @@ import view.DivorceView;
 import view.MainView;
 import view.MariageView;
 import view.NaissanceView;
+import view.SaisiePView;
 
 
 public class Main {
@@ -23,9 +24,6 @@ public class Main {
 		mairie.ajouterCitoyen(citoyen);
 		MainView affichage = new MainView(mairie);
 		
-		MariageView affichagemariage=new MariageView(mariage);
-		NaissanceView affichagenaissance= new NaissanceView(naissance);
-		DivorceView affichageDivorce = new DivorceView();
 
 
 	}

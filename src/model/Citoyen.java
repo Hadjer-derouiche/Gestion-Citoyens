@@ -76,7 +76,16 @@ public class Citoyen {
         this.dateNaiss = dateNaiss;
     }
     
+    public void ajouterMar(ActeMariage m) {
+    }
     
+    public boolean estFemme() {
+        return this instanceof Femme;
+    }
+
+    public boolean estHomme() {
+        return this instanceof Homme;
+    }
     
 
 }

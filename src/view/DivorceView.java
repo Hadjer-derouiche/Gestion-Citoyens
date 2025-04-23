@@ -1,15 +1,19 @@
 package view;
 
 import javax.swing.*;
+
+import model.Mairie;
+
 import java.awt.*;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 public class DivorceView extends JFrame {
+	Mairie mairie;
 
-    JTextField jt1;
+    JTextField jt1, jt2;
     JButton valider, quitter;
-    JLabel labelTitre, labelIdentifiant, date;
+    JLabel labelTitre, labelId1,labelId2, date;
     JPanel topPanel, formPanel, bottomPanel;
 
     public static String getDateHeureActuelle() {
@@ -18,9 +22,12 @@ public class DivorceView extends JFrame {
         return maintenant.format(formatter);
     }
 
-    public DivorceView() {
+    public DivorceView(Mairie m) {
+    	
+    	mairie =m;
+    	
         setTitle("Formulaire de Divorce");
-        setPreferredSize(new Dimension(550, 300));
+        setPreferredSize(new Dimension(550, 400));
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         getContentPane().setLayout(new BoxLayout(getContentPane(), BoxLayout.Y_AXIS));
 
@@ -42,16 +49,20 @@ public class DivorceView extends JFrame {
 
         // ===== Formulaire : champ identifiant =====
         formPanel = new JPanel();
-        formPanel.setLayout(new GridLayout(1, 2, 20, 20));
+        formPanel.setLayout(new GridLayout(2, 2, 20, 20));
         formPanel.setBorder(BorderFactory.createEmptyBorder(30, 50, 30, 50));
 
-        labelIdentifiant = new JLabel("Identifiant de la personne :");
-        labelIdentifiant.setFont(new Font("Arial", Font.BOLD, 14));
+        labelId1 = new JLabel("Identifiant de le conjoint :");
+        labelId2 = new JLabel("Identifiant de la conjointe:");
+        labelId1.setFont(new Font("Arial", Font.BOLD, 14));
+        labelId2.setFont(new Font("Arial", Font.BOLD, 14));
 
         jt1 = new JTextField(15);
-
-        formPanel.add(labelIdentifiant);
+        jt2 = new JTextField(15);
+        formPanel.add(labelId1);
         formPanel.add(jt1);
+        formPanel.add(labelId2);
+        formPanel.add(jt2);
 
         // ===== Bas de page : boutons =====
         bottomPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 20, 10));
@@ -81,20 +92,7 @@ public class DivorceView extends JFrame {
         getContentPane().add(formPanel);
         getContentPane().add(bottomPanel);
 
-        // ===== Actions boutons =====
-        valider.addActionListener(e -> {
-            String id = jt1.getText().trim();
-
-            if (id.isEmpty()) {
-                JOptionPane.showMessageDialog(this, "Veuillez entrer un identifiant.");
-            } else if (id.equals("123")) {
-                JOptionPane.showMessageDialog(this, "Le divorce a bien été enregistré pour l'identifiant : " + id);
-            } else if (id.equals("999")) {
-                JOptionPane.showMessageDialog(this, "Cette personne n'existe pas dans le système.", "Erreur", JOptionPane.ERROR_MESSAGE);
-            } else {
-                JOptionPane.showMessageDialog(this, "Cette personne n’est pas mariée.");
-            }
-        });
+      
 
         quitter.addActionListener(e -> dispose());
 
@@ -103,7 +101,6 @@ public class DivorceView extends JFrame {
         setVisible(true);
     }
 
-    public static void main(String[] args) {
-        SwingUtilities.invokeLater(() -> new DivorceView());
-    }
+    
+    
 }

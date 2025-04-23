@@ -1,6 +1,9 @@
 package view;
 
 import javax.swing.*;
+
+import controler.MainContrl;
+
 import java.awt.*;
 import model.Mairie;
 import java.time.LocalDateTime;
@@ -120,6 +123,20 @@ public class MainView extends JFrame {
 			getContentPane().add(bottomPanel);
 
 			
+		// gerer les buttons 
+			
+			String[] nomsInterfaces = {
+				    "saisieP", "etatP", "affichageP", "mariage", "divorce", "naissance", "deces"
+				};
+			MainContrl c= new MainContrl(m);
+			
+			for (int i = 0; i < boutons.length; i++) {
+			    boutons[i].setActionCommand(nomsInterfaces[i]); // Sert à identifier l'action
+			    boutons[i].addActionListener(c);      // Ajoute le contrôleur
+			}
+	
+			
+			quitterP.addActionListener(e -> dispose());
 			
 
 		 this.show();

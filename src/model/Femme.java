@@ -9,9 +9,7 @@ import java.util.*;
  * 
  */
 public class Femme extends Citoyen {
-    /**
-     * 
-     */
+    
     private static String sexe = "Femme";
     
      Vector <ActeMariage> listMar = new Vector<ActeMariage>();

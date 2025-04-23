@@ -3,17 +3,26 @@ package view;
 import javax.swing.*;
 import java.awt.*;
 import model.ActeNaissance;
+import model.Mairie;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 public class NaissanceView extends JFrame {
+	
+	Mairie mairie;
 
     JTextField jt1, jt2;
     JButton valider, quitter;
     JLabel labelTitre, labelHomme, labelFemme, date;
     JPanel mainPanel, formPanel, topPanel, bottomPanel;
-    ActeNaissance acteNaissance;
+    JTextField nom =new JTextField(15);
+	JTextField prenom =new JTextField(15);
+	JTextField dateNaissance =new JTextField(15);
+	ButtonGroup grp = new ButtonGroup();
+	JRadioButton r1 = new JRadioButton("Femme"); 
+	JRadioButton r2 = new JRadioButton("Homme");
+
 
     public static String getDateHeureActuelle() {
         LocalDateTime maintenant = LocalDateTime.now();
@@ -21,11 +30,11 @@ public class NaissanceView extends JFrame {
         return maintenant.format(formatter);
     }
 
-    public NaissanceView(ActeNaissance acteNaissance) {
-        this.acteNaissance = acteNaissance;
-
+    public NaissanceView (Mairie m) {
+    	mairie=m;
+        
         setTitle("Formulaire de Naissance");
-        setPreferredSize(new Dimension(550, 350));
+        setPreferredSize(new Dimension(600, 600));
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         getContentPane().setLayout(new BoxLayout(getContentPane(), BoxLayout.Y_AXIS));
 
@@ -45,13 +54,12 @@ public class NaissanceView extends JFrame {
         topPanel.add(Box.createHorizontalGlue());
 
         formPanel = new JPanel();
-        formPanel.setLayout(new GridLayout(2, 2, 20, 20));
+        formPanel.setLayout(new GridLayout(5, 2, 20, 20));
         formPanel.setBorder(BorderFactory.createEmptyBorder(30, 50, 30, 50));
 
         labelHomme = new JLabel("ID de pére :");
         labelFemme = new JLabel("ID de la mére :");
-        labelHomme.setFont(new Font("Arial", Font.BOLD, 14));
-        labelFemme.setFont(new Font("Arial", Font.BOLD, 14));
+    
 
         jt1 = new JTextField(15);
         jt2 = new JTextField(15);
@@ -60,6 +68,25 @@ public class NaissanceView extends JFrame {
         formPanel.add(jt1);
         formPanel.add(labelFemme);
         formPanel.add(jt2);
+        
+        r2.setSelected(true);
+		  grp.add(r1);
+		  grp.add(r2);
+		  
+		  formPanel.add(new JLabel("Nom : "));
+		  formPanel.add(nom);
+		  formPanel.add(new JLabel("Prenomom : "));
+		  formPanel.add(prenom);
+		  formPanel.add(new JLabel("Sexe : "));
+		  JPanel sexePanel = new JPanel();
+		  sexePanel.add(r1);
+		  sexePanel.add(r2);
+		  formPanel.add(sexePanel);
+		  
+		  for (Component comp : formPanel.getComponents()) {
+			    comp.setFont(new Font("Arial", Font.BOLD, 14));
+			}
+
 
         bottomPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 20, 10));
         valider = new JButton("Ajouter");
@@ -84,6 +111,9 @@ public class NaissanceView extends JFrame {
         getContentPane().add(Box.createRigidArea(new Dimension(0, 30)));
         getContentPane().add(formPanel);
         getContentPane().add(bottomPanel);
+        
+        
+        quitter.addActionListener(e -> dispose());
 
         pack();
         setLocationRelativeTo(null); 
