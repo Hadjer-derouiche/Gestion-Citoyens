@@ -2,55 +2,75 @@ package view;
 
 import javax.swing.*;
 import java.awt.*;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-
+import controler.EtatPContrl;
 import model.Mairie;
 
-public class EtatPView extends JFrame{
-	
-	Mairie mairie;
+public class EtatPView extends JFrame {
 
-	JLabel labelTitre,date, labelCitoyen;
-    JTextField id;
-    JButton  rechercher, quitter;
-    JLabel etat;
-    JPanel topPanel;
-    
-    public static String getDateHeureActuelle() {
-        LocalDateTime maintenant = LocalDateTime.now();
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
-        return maintenant.format(formatter);
-    }
+    JTextField champID;
+    JButton rechercher, quitter;
+    JLabel labelTitre, labelID, resultat;
+    JPanel topPanel, formPanel, bottomPanel;
 
-     
-    public 	EtatPView (Mairie m)
-    {
-    	mairie =m;
-
-        setTitle("Formulaire de Mariage");
-        setPreferredSize(new Dimension(550, 350));
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        getContentPane().setLayout(new BoxLayout(getContentPane(), BoxLayout.Y_AXIS));
+    public EtatPView(Mairie mairie) {
+        setTitle("État d'une personne");
+        setPreferredSize(new Dimension(500, 300));
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        setLayout(new BoxLayout(getContentPane(), BoxLayout.Y_AXIS));
 
         topPanel = new JPanel();
-        topPanel.setLayout(new BoxLayout(topPanel, BoxLayout.X_AXIS));
-
-        labelTitre = new JLabel("Formulaire de Mariage");
+        labelTitre = new JLabel("Rechercher l'état d'une personne");
         labelTitre.setFont(new Font("Arial", Font.BOLD, 18));
-
-        date = new JLabel(getDateHeureActuelle());
-        date.setFont(new Font("Arial", Font.BOLD, 14));
-
-        topPanel.add(Box.createHorizontalGlue());
         topPanel.add(labelTitre);
-        topPanel.add(Box.createRigidArea(new Dimension(100, 0)));
-        topPanel.add(date);
-        topPanel.add(Box.createHorizontalGlue());
-        
-        
-        
-    }
-    
 
+        formPanel = new JPanel(new GridLayout(2, 2, 10, 10));
+        labelID = new JLabel("ID de la personne :");
+        champID = new JTextField(15);
+        resultat = new JLabel("");
+        resultat.setForeground(Color.black);
+        resultat.setFont(new Font("Arial", Font.BOLD,12));
+
+
+        formPanel.setBorder(BorderFactory.createEmptyBorder(20, 50, 20, 50));
+        formPanel.add(labelID);
+        formPanel.add(champID);
+        formPanel.add(new JLabel("Résultat :"));
+        formPanel.add(resultat);
+
+        bottomPanel = new JPanel();
+        rechercher = new JButton("Rechercher");
+        quitter = new JButton("Quitter");
+
+        bottomPanel.add(rechercher);
+        bottomPanel.add(quitter);
+        
+        rechercher.setPreferredSize(new Dimension(120, 30));
+        quitter.setPreferredSize(new Dimension(120, 30));
+
+        rechercher.setFont(new Font("Arial", Font.BOLD, 12));
+        quitter.setFont(new Font("Arial", Font.BOLD, 12));
+
+        rechercher.setBackground(new Color(115, 115, 115));
+        rechercher.setForeground(Color.WHITE);
+        quitter.setBackground(Color.RED);
+        quitter.setForeground(Color.WHITE);
+        
+        //resultat.setForeground(new Color(0, 102, 204)); 
+        //resultat.setFont(new Font("SansSerif", Font.PLAIN, 14));
+
+   
+
+        add(topPanel);
+        add(formPanel);
+        add(bottomPanel);
+
+        quitter.addActionListener(e -> dispose());
+
+        EtatPContrl controleur = new EtatPContrl(champID, resultat, mairie);
+        rechercher.addActionListener(controleur);
+
+        pack();
+        setLocationRelativeTo(null);
+        setVisible(true);
+    }
 }
