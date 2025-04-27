@@ -86,6 +86,19 @@ public class Citoyen {
     public boolean estHomme() {
         return this instanceof Homme;
     }
+
+
+
+
+	public Citoyen getConjoint() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+
+
+
     
 
 }
