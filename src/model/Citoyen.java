@@ -3,6 +3,7 @@ package model;
 
 import java.io.*;
 import java.time.LocalDate;
+import java.time.Period;
 import java.util.*;
 
 /**
@@ -21,6 +22,7 @@ public class Citoyen {
     ActeDeces deces;
     ActeNaissance acteNaiss;
     Mairie mairie;
+    Vector <ActeMariage> listMar = new Vector<ActeMariage>();
     
     public Citoyen(int idC, String n, String p, LocalDate dateNais) {
 		id = idC;
@@ -77,8 +79,13 @@ public class Citoyen {
     }
     
     public void ajouterMar(ActeMariage m) {
+        listMar.add(m);
     }
     
+    public int age()
+    {
+    	return Period.between(dateNaiss, LocalDate.now()).getYears();
+    }
     public boolean estFemme() {
         return this instanceof Femme;
     }
@@ -87,5 +94,13 @@ public class Citoyen {
         return this instanceof Homme;
     }
     
+    public boolean estMarie() {
+        for (ActeMariage acte : listMar) {
+            if (acte.isValide()) {
+                return true; 
+            }
+        }
+        return false; 
+    }
 
 }

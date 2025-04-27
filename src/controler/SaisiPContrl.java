@@ -34,7 +34,6 @@ public class SaisiPContrl implements ActionListener  {
 		{
 			Femme newFemme= new Femme(12,sNom, sPren,date,mairie );
 			mairie.ajouterCitoyen(newFemme);
-			System.out.print("fait");
 			
 		}
 		else if(homme.isSelected())

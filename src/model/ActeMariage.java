@@ -10,7 +10,7 @@ import java.util.*;
  */
 public class ActeMariage {
     
-    private boolean div;
+    private boolean isValide;
     private int idActMariage;
     private LocalDate dateMariage;
     
@@ -19,7 +19,7 @@ public class ActeMariage {
     Mairie mairie;
 
     public ActeMariage(boolean d, int idm) {
-		div = d;
+		isValide = d;
 		idActMariage = idm;
 	}
     
@@ -27,7 +27,7 @@ public class ActeMariage {
 
 
 	public ActeMariage(boolean d, int idm, Citoyen f, Citoyen h,LocalDate date, Mairie m) {
-		div = d;
+		isValide = d;
 		idActMariage = idm;
 		Conjointe = (Femme) f;
 		Conjoint = (Homme) h;
@@ -39,12 +39,12 @@ public class ActeMariage {
     /**
      * getter and setter
      */
-    public boolean isDiv() {
-        return div;
+    public boolean isValide() {
+        return isValide;
     }
 
     public void setDiv(boolean div) {
-        this.div = div;
+        this.isValide = div;
     }
 
     public int getIdActMariage() {

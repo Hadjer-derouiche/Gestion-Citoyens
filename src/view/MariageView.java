@@ -1,6 +1,10 @@
 package view;
 
 import javax.swing.*;
+
+import controler.MariageContrl;
+import controler.SaisiPContrl;
+
 import java.awt.*;
 import model.ActeMariage;
 import model.Mairie;
@@ -13,7 +17,7 @@ public class MariageView extends JFrame {
 
     JTextField jt1, jt2, dateM;
     JButton valider, quitter;
-    JLabel labelTitre, labelHomme, labelFemme, date,datem;
+    JLabel labelTitre, labelHomme, labelFemme, date,datem,erreur;
     JPanel mainPanel, formPanel, topPanel, bottomPanel;
     ActeMariage acteMariage;
 
@@ -29,7 +33,7 @@ public class MariageView extends JFrame {
 		mairie =m;
 
         setTitle("Formulaire de Mariage");
-        setPreferredSize(new Dimension(550, 350));
+        setPreferredSize(new Dimension(550, 450));
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         getContentPane().setLayout(new BoxLayout(getContentPane(), BoxLayout.Y_AXIS));
 
@@ -49,7 +53,7 @@ public class MariageView extends JFrame {
         topPanel.add(Box.createHorizontalGlue());
 
         formPanel = new JPanel();
-        formPanel.setLayout(new GridLayout(2, 2, 20, 20));
+        formPanel.setLayout(new GridLayout(3, 2, 20, 20));
         formPanel.setBorder(BorderFactory.createEmptyBorder(30, 50, 30, 50));
 
         labelHomme = new JLabel("ID de marié :");
@@ -62,6 +66,7 @@ public class MariageView extends JFrame {
         jt1 = new JTextField(15);
         jt2 = new JTextField(15);
         dateM= new JTextField(15);
+        erreur=new JLabel("");
 
         formPanel.add(labelHomme);
         formPanel.add(jt1);
@@ -69,6 +74,7 @@ public class MariageView extends JFrame {
         formPanel.add(jt2);
         formPanel.add(datem);
         formPanel.add(dateM);
+        
 
         bottomPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 20, 10));
         valider = new JButton("Valider");
@@ -87,15 +93,24 @@ public class MariageView extends JFrame {
 
         bottomPanel.add(valider);
         bottomPanel.add(quitter);
-
+      
+        
+        erreur.setFont(new Font("Arial", Font.BOLD, 14));
+        erreur.setAlignmentX(Component.CENTER_ALIGNMENT);
+        erreur.setForeground(Color.RED); 
+        erreur.setBorder(BorderFactory.createEmptyBorder(20, 0, 20, 0));
         getContentPane().add(Box.createRigidArea(new Dimension(0, 20)));
         getContentPane().add(topPanel);
-        getContentPane().add(Box.createRigidArea(new Dimension(0, 30)));
         getContentPane().add(formPanel);
+        getContentPane().add(erreur);
+        
         getContentPane().add(bottomPanel);
         
         
         quitter.addActionListener(e -> dispose());
+        
+        MariageContrl c= new MariageContrl(jt1,jt2,dateM,erreur,mairie);
+		valider.addActionListener(c);
         
         
 

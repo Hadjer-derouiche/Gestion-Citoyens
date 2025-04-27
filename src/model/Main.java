@@ -18,10 +18,11 @@ public class Main {
 
 		Mairie mairie = new Mairie(1, "senia", "edresse F1");
 		Femme citoyen = new Femme(5, "celina", "ikhlef", LocalDate.of(2003, 12, 31), mairie);
-		ActeMariage mariage= new ActeMariage(false, 12);
-		ActeNaissance naissance= new ActeNaissance(1);
+		Homme citoyen2 = new Homme(6, "mohemed", "allel", LocalDate.of(2005, 12, 31), mairie);
+
 
 		mairie.ajouterCitoyen(citoyen);
+		mairie.ajouterCitoyen(citoyen2);
 		MainView affichage = new MainView(mairie);
 		
 

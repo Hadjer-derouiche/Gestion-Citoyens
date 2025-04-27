@@ -14,7 +14,6 @@ public class Homme extends Citoyen {
      */
     private static String sexe = "Homme";
 
-    Vector<ActeMariage> listMar = new Vector<ActeMariage>();
     Vector<ActeNaissance> listeacteNaiss = new Vector<ActeNaissance>();
 
     /**
@@ -24,9 +23,7 @@ public class Homme extends Citoyen {
         super(idC, n, p, dateNais, m);
     }
 
-    public void ajouterMar(ActeMariage m) {
-        listMar.add(m);
-    }
+   
 
     public void ajouterEnfant(ActeNaissance n) {
         listeacteNaiss.add(n);
