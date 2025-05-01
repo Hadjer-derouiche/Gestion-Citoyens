@@ -78,6 +78,15 @@ public class Mairie {
         this.adresse = adresse;
     }
     
+    public ActeMariage recupererActMar(int id)
+    {
+    	for(ActeMariage m:listactemariage)
+    	{
+    		if(m.getIdActMariage()== id)
+    			return m ;
+    	}
+    	return null;
+    }
      
    public  Citoyen recupererById (int id)
    {

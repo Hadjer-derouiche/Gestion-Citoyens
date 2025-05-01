@@ -9,7 +9,6 @@ import view.MariageView;
 import view.NaissanceView;
 import view.SaisiePView;
 
-
 public class Main {
 
 
@@ -23,8 +22,7 @@ public class Main {
 
 		mairie.ajouterCitoyen(citoyen);
 		mairie.ajouterCitoyen(citoyen2);
-		MainView affichage = new MainView(mairie);
-		
+		MainView aff = new MainView(mairie);
 
 
 	}

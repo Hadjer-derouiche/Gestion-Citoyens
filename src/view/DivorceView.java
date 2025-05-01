@@ -2,6 +2,7 @@ package view;
 
 import javax.swing.*;
 
+import controler.DivorceContrl;
 import model.Mairie;
 
 import java.awt.*;
@@ -11,9 +12,9 @@ import java.time.format.DateTimeFormatter;
 public class DivorceView extends JFrame {
 	Mairie mairie;
 
-    JTextField jt1, jt2;
+    JTextField jt1,dateM;
     JButton valider, quitter;
-    JLabel labelTitre, labelId1,labelId2, date;
+    JLabel labelTitre, labelId1, date,datem,erreur;;
     JPanel topPanel, formPanel, bottomPanel;
 
     public static String getDateHeureActuelle() {
@@ -31,7 +32,7 @@ public class DivorceView extends JFrame {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         getContentPane().setLayout(new BoxLayout(getContentPane(), BoxLayout.Y_AXIS));
 
-        // ===== Top panel avec le titre et la date =====
+       
         topPanel = new JPanel();
         topPanel.setLayout(new BoxLayout(topPanel, BoxLayout.X_AXIS));
 
@@ -52,17 +53,20 @@ public class DivorceView extends JFrame {
         formPanel.setLayout(new GridLayout(2, 2, 20, 20));
         formPanel.setBorder(BorderFactory.createEmptyBorder(30, 50, 30, 50));
 
-        labelId1 = new JLabel("Identifiant de le conjoint :");
-        labelId2 = new JLabel("Identifiant de la conjointe:");
-        labelId1.setFont(new Font("Arial", Font.BOLD, 14));
-        labelId2.setFont(new Font("Arial", Font.BOLD, 14));
-
+        labelId1 = new JLabel("Identifiant d'act de mariage :");
+        date= new JLabel("Date de divorce ");
+      
+        
         jt1 = new JTextField(15);
-        jt2 = new JTextField(15);
+        dateM = new JTextField(15);
         formPanel.add(labelId1);
         formPanel.add(jt1);
-        formPanel.add(labelId2);
-        formPanel.add(jt2);
+        formPanel.add(date);
+        formPanel.add(dateM);
+        
+        for (Component comp : formPanel.getComponents()) {
+		    comp.setFont(new Font("Arial", Font.BOLD, 14));
+		}
 
         // ===== Bas de page : boutons =====
         bottomPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 20, 10));
@@ -85,16 +89,26 @@ public class DivorceView extends JFrame {
         bottomPanel.add(valider);
         bottomPanel.add(quitter);
 
+        
+        erreur=new JLabel("");
+        erreur.setFont(new Font("Arial", Font.BOLD, 14));
+        erreur.setAlignmentX(Component.CENTER_ALIGNMENT);
+        erreur.setForeground(Color.RED); 
+        erreur.setBorder(BorderFactory.createEmptyBorder(20, 0, 20, 0));
         // ===== Ajout des panels à la fenêtre =====
         getContentPane().add(Box.createRigidArea(new Dimension(0, 20)));
         getContentPane().add(topPanel);
         getContentPane().add(Box.createRigidArea(new Dimension(0, 30)));
         getContentPane().add(formPanel);
+        getContentPane().add(erreur);
         getContentPane().add(bottomPanel);
 
       
 
         quitter.addActionListener(e -> dispose());
+        
+        DivorceContrl c= new DivorceContrl(jt1,dateM,erreur,mairie);
+		valider.addActionListener(c);
 
         pack();
         setLocationRelativeTo(null); // centre la fenêtre
