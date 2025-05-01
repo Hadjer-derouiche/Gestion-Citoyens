@@ -1,6 +1,7 @@
 package model;
 
 import java.io.*;
+import java.time.LocalDate;
 import java.util.*;
 
 /**
@@ -88,5 +89,32 @@ public class Mairie {
 	   return null;
    }
     
+public void declarerDeces(int idCitoyen, LocalDate dateDeces) {
+    Citoyen c = recupererById(idCitoyen);
+    if (c == null) {
+        System.out.println("Aucun citoyen avec cet ID.");
+        return;
+    }
+    if (c.isEstDecede()) {
+        System.out.println("Cette personne est déjà décédée.");
+        return;
+    }
 
+    ActeDeces acte = new ActeDeces(0, dateDeces, this, c); 
+    
+
+    ajouterDeces(acte); 
+    c.setActeDeces(acte);
+
+    if (c.estMarie()) {
+        Citoyen conjoint = c.getConjoint();
+        if (conjoint != null) {
+            for (ActeMariage mariage : conjoint.listMar) {
+                mariage.setIsValide(false);
+            }
+        }
+    }
+
+    System.out.println("Décès enregistré avec succès pour " + c.getNom() + " " + c.getPrenom());
+}
 }

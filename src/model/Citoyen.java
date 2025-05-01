@@ -18,6 +18,9 @@ public class Citoyen {
     private String nom;
     private String prenom;
     private LocalDate dateNaiss;
+    private boolean estDecede = false;
+
+  
     
     ActeDeces deces;
     ActeNaissance acteNaiss;
@@ -77,7 +80,20 @@ public class Citoyen {
     public void setDateNaiss(LocalDate dateNaiss) {
         this.dateNaiss = dateNaiss;
     }
-    
+
+  
+    public void setActeDeces(ActeDeces acte) {
+        this.deces = acte;
+    }
+
+    public boolean isEstDecede() {
+        return deces != null;
+    }
+
+
+    public void setEstDecede(boolean estDecede) { //
+        this.estDecede = estDecede;
+    }
     public void ajouterMar(ActeMariage m) {
         listMar.add(m);
     }
@@ -97,11 +113,21 @@ public class Citoyen {
 
 
 
-	public Citoyen getConjoint() {
-		// TODO Auto-generated method stub
-		return null;
-	}
+    public Citoyen getConjoint() {
+        // On parcourt les actes de mariage
+        for (ActeMariage mariage : listMar) {
+            if (mariage.isValide()) {  // Vérifie si le mariage est valide
+                // Cherche l'autre conjoint dans l'acte de mariage
+                Citoyen conjoint = mariage.getConjoint(this);  // Utilisation de la méthode getConjoint de ActeMariage
+                if (conjoint != null) {
+                    return conjoint;  // Si un conjoint est trouvé, on le retourne
+                }
+            }
+        }
+        return null;  // Si aucun conjoint valide n'est trouvé
+    }
 
+	
 
 
 
@@ -115,5 +141,10 @@ public class Citoyen {
         }
         return false; 
     }
+
+
+
+
+
 
 }

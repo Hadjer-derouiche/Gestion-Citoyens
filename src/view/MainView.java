@@ -20,7 +20,7 @@ public class MainView extends JFrame {
 	JButton mariage = new JButton ("Mariage");
 	JButton divorce = new JButton ("Divorce");
 	JButton naissance = new JButton ("Naissance");
-	JButton deces= new JButton ("Deces");
+	JButton deces= new JButton ("Declarer un deces");
 	JButton quitterP = new JButton ("Quitter le programme ");
 	
 	JPanel panel= new JPanel();
@@ -131,7 +131,7 @@ public class MainView extends JFrame {
 			MainContrl c= new MainContrl(m);
 			
 			for (int i = 0; i < boutons.length; i++) {
-			    boutons[i].setActionCommand(nomsInterfaces[i]); // Sert à identifier l'action
+			    boutons[i].setActionCommand(nomsInterfaces[i]); 
 			    boutons[i].addActionListener(c);      // Ajoute le contrôleur
 			}
 	

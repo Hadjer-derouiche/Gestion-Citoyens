@@ -54,6 +54,25 @@ public class ActeMariage {
     public void setIdActMariage(int idActMariage) {
         this.idActMariage = idActMariage;
     }
+    
+
+    public void setIsValide(boolean valide) {
+        this.isValide = valide;
+    }
+    public Citoyen getConjoint(Citoyen c) {
+        if (c instanceof Femme && c == Conjointe) {
+            return Conjoint;
+        } else if (c instanceof Homme && c == Conjoint) {
+            return Conjointe;
+        }
+        return null;
+    }
+
+    
+    
+
+   
+
      
      
 }

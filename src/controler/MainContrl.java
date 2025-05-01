@@ -5,6 +5,7 @@ import javax.swing.*;
 
 import model.Mairie;
 import view.AffichePView;
+import view.DecesView;
 import view.DivorceView;
 import view.EtatPView;
 import view.MariageView;
@@ -37,6 +38,9 @@ public class MainContrl implements ActionListener  {
 	            break;
 	        case "etatP":
 	        	new EtatPView(mairie);
+	            break;
+	        case "deces":
+	        	new DecesView(mairie);
 	            break;
 	        case "affichageP":
 	          new AffichePView(mairie);
