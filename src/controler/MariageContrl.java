@@ -66,8 +66,8 @@ public class MariageContrl implements ActionListener {
 		   f.ajouterMar(newMar);
 		   h.ajouterMar(newMar);
 		   erreur.setForeground(Color.GREEN);
-		   erreur.setText("Mariage enregistré avec succès !");
-	     }
+           erreur.setText("Mariage enregistré avec succès ! ID de votre acte de mariage : " + newMar.getIdActMariage());
+		     }
 		
 	   idConjoint.setText("");
        idConjointe.setText("");

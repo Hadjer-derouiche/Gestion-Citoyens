@@ -25,32 +25,48 @@ public void actionPerformed(ActionEvent e) {
         Citoyen c = mairie.recupererById(id);
 
         if (c == null) {
-            resultat.setText("Aucune personne trouvée avec cet ID.");
+        	resultat.setText("<html>Aucune personne trouvée avec cet ID.</html>");
         } else {
             String nomComplet = c.getNom() + " " + c.getPrenom();
             String sexe = c.estFemme() ? "Femme" : "Homme";
             String naissance = c.getDateNaiss().toString();
+            String etat = c.isEstDecede() ? "Décédé(e)" : "Vivant(e)";
+            String divorce = "";
+            if (c.estDivorce()) {
+                divorce = "- Situation : Divorcé(e)<br>";
+            }
             String conjoint = "Aucun";
 
-            if (c.getConjoint() != null) {
-                Citoyen conjointPersonne = c.getConjoint();
+            Citoyen conjointPersonne = c.getConjoint();
+            System.out.println("Conjoint trouvé ? " + (conjointPersonne != null));
+            if (conjointPersonne != null) {
+                System.out.println("Conjoint décédé ? " + conjointPersonne.isEstDecede());
+            }
+            if (conjointPersonne != null) {
+                String nomPrenomConjoint = conjointPersonne.getNom() + " " + conjointPersonne.getPrenom();
+
                 if (conjointPersonne.isEstDecede()) {
-                    conjoint = c.estFemme() ? "Veuve" : "Veuf";
+                    String statut = c.estFemme() ? "Veuve" : "Veuf";
+                    conjoint = nomPrenomConjoint + " (" + statut + ")";
+                } else if (c.estDivorce()) {
+                    conjoint = "Divorcé(e)";
                 } else {
-                    conjoint = conjointPersonne.getNom() + " " + conjointPersonne.getPrenom();
+                    conjoint = nomPrenomConjoint;
                 }
             }
 
-            String etat = c.isEstDecede() ? "Décédé(e)" : "Vivant(e)";
+
 
             resultat.setText(
-                "<html>"
-                + "- " + nomComplet + " (" + sexe + ")<br>"
-                + "- Né(e) le " + naissance + "<br>"
-                + "- Conjoint : " + conjoint + "<br>"
-                + "- État : " + etat
-                + "</html>"
-            );
+            	    "<html>"
+            	    + "- " + nomComplet + " (" + sexe + ")<br>"
+            	    + "- Né(e) le " + naissance + "<br>"
+            	    + divorce
+            	    + "- Conjoint : " + conjoint + "<br>"
+            	    + "- État : " + etat
+            	    + "</html>"
+            	);
+
         }
 
     } catch (NumberFormatException ex) {

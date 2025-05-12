@@ -53,7 +53,7 @@ public class DecesView extends JFrame {
         boutonDeclarer = new JButton("Déclarer Décès");
         quitter = new JButton("Quitter");
 
-        boutonDeclarer.setPreferredSize(new Dimension(120, 30));
+        boutonDeclarer.setPreferredSize(new Dimension(150, 30));
         quitter.setPreferredSize(new Dimension(120, 30));
 
         boutonDeclarer.setFont(new Font("Arial", Font.BOLD, 12));
