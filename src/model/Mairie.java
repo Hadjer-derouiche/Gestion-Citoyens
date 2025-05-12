@@ -11,6 +11,7 @@ public class Mairie {
     /**
      * 
      */
+	private static int compteurId = 1;
     private int idMairie;
     private String nomMairie;
     private String adresse;
@@ -23,8 +24,8 @@ public class Mairie {
     /**
      * Default constructor
      */
-    public Mairie(int idM, String nomM, String adr) {
-        idMairie = idM;
+    public Mairie( String nomM, String adr) {
+        this.idMairie = compteurId++;
         nomMairie = nomM;
         adresse = adr;
     }
@@ -109,7 +110,7 @@ public void declarerDeces(int idCitoyen, LocalDate dateDeces) {
         return;
     }
 
-    ActeDeces acte = new ActeDeces(0, dateDeces, this, c); 
+    ActeDeces acte = new ActeDeces( dateDeces, this, c); 
     
 
     ajouterDeces(acte); 

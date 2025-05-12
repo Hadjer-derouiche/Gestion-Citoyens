@@ -10,6 +10,7 @@ import java.util.*;
  */
 public class ActeMariage {
     
+	private static int compteurId = 1;
     private boolean isValide;
     private int idActMariage;
     private LocalDate dateMariage;
@@ -18,17 +19,17 @@ public class ActeMariage {
     Homme Conjoint;
     Mairie mairie;
 
-    public ActeMariage(boolean d, int idm) {
+    public ActeMariage(boolean d) {
 		isValide = d;
-		idActMariage = idm;
+		this.idActMariage = compteurId++;
 	}
     
     
 
 
-	public ActeMariage(boolean d, int idm, Citoyen f, Citoyen h,LocalDate date, Mairie m) {
+	public ActeMariage(boolean d, Citoyen f, Citoyen h,LocalDate date, Mairie m) {
+		this.idActMariage = compteurId++;
 		isValide = d;
-		idActMariage = idm;
 		Conjointe = (Femme) f;
 		Conjoint = (Homme) h;
 		dateMariage=date;

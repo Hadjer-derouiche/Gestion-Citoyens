@@ -17,8 +17,8 @@ public class Femme extends Citoyen {
      /**
      * Default constructor
      */
-    public Femme(int idC, String n, String p, LocalDate dateNais, Mairie m) {
-		super(idC, n, p, dateNais, m);
+    public Femme( String n, String p, LocalDate dateNais, Mairie m) {
+		super( n, p, dateNais, m);
 	}
 
      

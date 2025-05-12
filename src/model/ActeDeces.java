@@ -9,7 +9,7 @@ import java.util.*;
 public class ActeDeces {
 
     
-  
+	private static int compteurId = 1;
     private int idActeDeces;
     private LocalDate dateDeces;
     
@@ -17,13 +17,13 @@ public class ActeDeces {
     Citoyen citoyen;
     
     
-    public ActeDeces(int d, LocalDate date) {
-		idActeDeces = d;
+    public ActeDeces( LocalDate date) {
+    	this.idActeDeces = compteurId++;
 		dateDeces = date;
 	}
 	
-	public ActeDeces(int d, LocalDate date, Mairie m, Citoyen c) {
-		idActeDeces = d;
+	public ActeDeces(LocalDate date, Mairie m, Citoyen c) {
+		this.idActeDeces = compteurId++;
 		dateDeces = date;
 		mairie=m;
 		citoyen=c;

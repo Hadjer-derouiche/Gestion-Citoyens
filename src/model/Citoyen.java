@@ -14,6 +14,7 @@ public class Citoyen {
     /**
      * 
      */
+	private static int compteurId = 1;
     private int id;
     private String nom;
     private String prenom;
@@ -27,8 +28,8 @@ public class Citoyen {
     Mairie mairie;
     Vector <ActeMariage> listMar = new Vector<ActeMariage>();
     
-    public Citoyen(int idC, String n, String p, LocalDate dateNais) {
-		id = idC;
+    public Citoyen(String n, String p, LocalDate dateNais) {
+    	this.id = compteurId++;
 		nom = n;
 		prenom = p;
 		dateNaiss = dateNais;
@@ -37,8 +38,8 @@ public class Citoyen {
 
 
 
-	public Citoyen(int idC, String n, String p, LocalDate dateNais,Mairie m) {
-		id = idC;
+	public Citoyen(String n, String p, LocalDate dateNais,Mairie m) {
+		this.id = compteurId++;
 		nom = n;
 		prenom = p;
 		dateNaiss = dateNais;

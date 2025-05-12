@@ -15,9 +15,9 @@ public class Main {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 
-		Mairie mairie = new Mairie(1, "senia", "edresse F1");
-		Femme citoyen = new Femme(5, "celina", "ikhlef", LocalDate.of(2003, 12, 31), mairie);
-		Homme citoyen2 = new Homme(6, "mohemed", "allel", LocalDate.of(2005, 12, 31), mairie);
+		Mairie mairie = new Mairie( "senia", "edresse F1");
+		Femme citoyen = new Femme("celina", "ikhlef", LocalDate.of(2003, 12, 31), mairie);
+		Homme citoyen2 = new Homme("mohemed", "allel", LocalDate.of(2005, 12, 31), mairie);
 
 
 		mairie.ajouterCitoyen(citoyen);

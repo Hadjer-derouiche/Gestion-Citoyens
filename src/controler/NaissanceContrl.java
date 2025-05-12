@@ -46,14 +46,14 @@ public class NaissanceContrl implements ActionListener {
         
 		if(femme.isSelected())
 		{
-			Femme newFemme= new Femme(12,sNom, sPren,date,mairie );
+			Femme newFemme= new Femme(sNom, sPren,date,mairie );
 			mairie.ajouterCitoyen(newFemme);
 			newActe= new ActeNaissance(1,pere,mere,newFemme);
 			
 		}
 		else if(homme.isSelected())
 		{
-			Homme newHomme = new Homme (13,sNom, sPren, date, mairie );
+			Homme newHomme = new Homme (sNom, sPren, date, mairie );
 			mairie.ajouterCitoyen(newHomme);
 		    newActe= new ActeNaissance(1,pere,mere,newHomme);
 			

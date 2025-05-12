@@ -10,13 +10,14 @@ import java.util.*;
 public class ActeNaissance {
     
     private int idActeNais;
+    private static int compteurId = 1;
     
     Citoyen citoyen,mere,pere;
     
     
   
       public ActeNaissance(int idN, Citoyen m, Citoyen p, Citoyen c) {
-          idActeNais = idN;
+          this.idActeNais =compteurId++;
           mere = m;
           pere = p;
           citoyen = c;

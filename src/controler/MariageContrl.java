@@ -64,7 +64,7 @@ public class MariageContrl implements ActionListener {
 			erreur.setText(" Le mariage requiert deux personnes de sexes différents.");
 		}
 		else {
-		   ActeMariage newMar= new ActeMariage(true,1,f,h,date, mairie);
+		   ActeMariage newMar= new ActeMariage(true,f,h,date, mairie);
 		   mairie.ajouterMar(newMar);
 		   f.ajouterMar(newMar);
 		   h.ajouterMar(newMar);
