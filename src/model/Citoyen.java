@@ -90,6 +90,11 @@ public class Citoyen {
         return deces != null;
     }
 
+    public boolean isVivant() {
+        return this.deces == null;
+    }
+
+
 
     public void setEstDecede(boolean estDecede) { //
         this.estDecede = estDecede;
@@ -115,20 +120,16 @@ public class Citoyen {
 
 
     public Citoyen getConjoint() {
-        // On parcourt les actes de mariage
         for (ActeMariage mariage : listMar) {
-            if (mariage.isValide()) {  // Vérifie si le mariage est valide
-                // Cherche l'autre conjoint dans l'acte de mariage
-                Citoyen conjoint = mariage.getConjoint(this);  // Utilisation de la méthode getConjoint de ActeMariage
-                if (conjoint != null) {
-                    return conjoint;  // Si un conjoint est trouvé, on le retourne
-                }
+            Citoyen conjoint = mariage.getConjoint(this);
+            if (conjoint != null) {
+                return conjoint; 
             }
         }
-        return null;  // Si aucun conjoint valide n'est trouvé
+        return null;
     }
 
-	
+
 
 
 
@@ -142,6 +143,26 @@ public class Citoyen {
         }
         return false; 
     }
+    
+    public ActeMariage getActeMariage() {
+        for (ActeMariage acte : listMar) {
+            return acte; 
+        }
+        return null;
+    }
+    
+    public boolean estDivorce() {
+        for (ActeMariage acte : listMar) {
+            if (acte.isValide() && acte.estDivorce()) {
+                return true; 
+            }
+        }
+        return false; 
+    }
+  
+
+
+
 
 
 

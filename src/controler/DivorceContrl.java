@@ -27,30 +27,36 @@ public class DivorceContrl implements ActionListener {
 	}
 	
 	
-	public void actionPerformed(ActionEvent e) {
-		
-		int id = Integer.parseInt(idActMariage.getText());
-		
-		ActeMariage acte=mairie.recupererActMar(id);
-		LocalDate date =LocalDate.parse(dateM.getText());
-		
-		
-		if ( acte == null) {
-            erreur.setText("acte de mariage introuvable avec l’ID fourni.");
-            return;
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        try {
+            int id = Integer.parseInt(idActMariage.getText());
+            ActeMariage acte = mairie.recupererActMar(id);
+            LocalDate date = LocalDate.parse(dateM.getText());
+
+            if (acte == null) {
+                erreur.setText("Acte de mariage introuvable avec l'ID fourni.");
+                return;
+            }
+
+            if (!acte.peutDivorcer()) {
+                erreur.setText("Un des conjoints est décédé. Divorce impossible.");
+                erreur.setForeground(Color.RED);
+                return;
+            }
+
+            
+            erreur.setForeground(Color.GREEN);
+            erreur.setText("Divorce enregistré avec succès !");
+            idActMariage.setText("");
+            dateM.setText("");
+
+        } catch (NumberFormatException ex) {
+            erreur.setText("Veuillez entrer un ID et une date valides.");
+            erreur.setForeground(Color.RED);
         }
-		
-		else {
-		   acte.setDiv(false);
-		   erreur.setForeground(Color.GREEN);
-		   erreur.setText("divorce enregistré avec succès !");
-	     }
-		
-	   idActMariage.setText("");
-       dateM.setText("");
-       
-		
-	}
+    }
 
 
 }
