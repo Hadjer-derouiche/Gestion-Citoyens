@@ -11,18 +11,11 @@ public class ActeNaissance {
     
     private int idActeNais;
     
-    Femme mere;
-    Homme pere;
-    Citoyen citoyen;
+    Citoyen citoyen,mere,pere;
     
     
-    public ActeNaissance(int idN) {
-        idActeNais = idN;
-      }
   
-  
-  
-      public ActeNaissance(int idN, Femme m, Homme p, Citoyen c) {
+      public ActeNaissance(int idN, Citoyen m, Citoyen p, Citoyen c) {
           idActeNais = idN;
           mere = m;
           pere = p;

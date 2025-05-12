@@ -44,7 +44,10 @@ public class MariageContrl implements ActionListener {
             erreur.setText("Citoyen introuvable avec l’ID fourni.");
             return;
         }
-		
+		else
+		{
+			
+		}
 		if (f.estMarie() || h.estMarie()) {
 		    erreur.setText("L'un des deux partenaires est déjà marié.");
 		    return;

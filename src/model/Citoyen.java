@@ -110,7 +110,8 @@ public class Citoyen {
         return this instanceof Homme;
     }
 
-
+    public void ajouterEnfant(ActeNaissance n) {
+    }
 
 
     public Citoyen getConjoint() {
