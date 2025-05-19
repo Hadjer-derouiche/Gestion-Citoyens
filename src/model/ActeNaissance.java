@@ -16,7 +16,7 @@ public class ActeNaissance {
     
     
   
-      public ActeNaissance(int idN, Citoyen m, Citoyen p, Citoyen c) {
+      public ActeNaissance( Citoyen m, Citoyen p, Citoyen c) {
           this.idActeNais =compteurId++;
           mere = m;
           pere = p;

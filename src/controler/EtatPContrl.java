@@ -25,7 +25,7 @@ public void actionPerformed(ActionEvent e) {
         Citoyen c = mairie.recupererById(id);
 
         if (c == null) {
-        	resultat.setText("<html>Aucune personne trouvée avec cet ID.</html>");
+        	resultat.setText("Aucune personne trouvée avec cet ID.");
         } else {
             String nomComplet = c.getNom() + " " + c.getPrenom();
             String sexe = c.estFemme() ? "Femme" : "Homme";

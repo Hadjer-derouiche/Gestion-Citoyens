@@ -14,7 +14,7 @@ public class EtatPView extends JFrame {
 
     public EtatPView(Mairie mairie) {
         setTitle("État d'une personne");
-        setPreferredSize(new Dimension(500, 300));
+        setPreferredSize(new Dimension(500, 400));
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setLayout(new BoxLayout(getContentPane(), BoxLayout.Y_AXIS));
 

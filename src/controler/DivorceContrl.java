@@ -47,6 +47,7 @@ public class DivorceContrl implements ActionListener {
             }
 
             
+            acte.enregistrerDivorce();
             erreur.setForeground(Color.GREEN);
             erreur.setText("Divorce enregistré avec succès !");
             idActMariage.setText("");

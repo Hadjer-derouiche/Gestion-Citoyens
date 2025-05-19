@@ -154,7 +154,7 @@ public class Citoyen {
     
     public boolean estDivorce() {
         for (ActeMariage acte : listMar) {
-            if (acte.isValide() && acte.estDivorce()) {
+            if (!acte.isValide()&& acte.peutDivorcer()) {
                 return true; 
             }
         }

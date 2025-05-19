@@ -48,20 +48,26 @@ public class NaissanceContrl implements ActionListener {
 		{
 			Femme newFemme= new Femme(sNom, sPren,date,mairie );
 			mairie.ajouterCitoyen(newFemme);
-			newActe= new ActeNaissance(1,pere,mere,newFemme);
+			newActe= new ActeNaissance(pere,mere,newFemme);
 			
 		}
 		else if(homme.isSelected())
 		{
 			Homme newHomme = new Homme (sNom, sPren, date, mairie );
 			mairie.ajouterCitoyen(newHomme);
-		    newActe= new ActeNaissance(1,pere,mere,newHomme);
+		    newActe= new ActeNaissance(pere,mere,newHomme);
 			
 		}
 		pere.ajouterEnfant(newActe);
 		mere.ajouterEnfant(newActe);
 		mairie.ajouterNaissance(newActe);
-		
+		idP.setText("");
+		idM.setText("");
+		  nom.setText("");
+	        prenom.setText("");
+	        dateNaiss.setText("");
+	        femme.setSelected(false);
+	        homme.setSelected(false);
 		
 		
 		

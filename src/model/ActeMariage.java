@@ -74,10 +74,6 @@ public class ActeMariage {
     public void enregistrerDivorce() {
         this.isValide = false;
     }
-
-    public boolean estDivorce() {
-        return !isValide;
-    }
     
     public boolean peutDivorcer() {
         return !Conjointe.isEstDecede() && !Conjoint.isEstDecede(); 
