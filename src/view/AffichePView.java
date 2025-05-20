@@ -1,59 +1,64 @@
 package view;
 
-import javax.swing.*;
+import javax.swing.JFrame;
+import javax.swing.JTable;
+import javax.swing.JScrollPane;
 import javax.swing.table.DefaultTableModel;
 import java.util.List;
 
+// Imports de ton modèle
 import model.Citoyen;
 import model.Mairie;
+import model.Femme;
+
 
 public class AffichePView extends JFrame {
     private final Mairie mairie;
     private final JTable table;
+    private final DefaultTableModel model;  // <-- nouveau champ
 
     public AffichePView(Mairie mairie) {
-        super("Liste des citoyens");  // titre de la fenêtre
+        super("Liste des citoyens");
         this.mairie = mairie;
 
-        // 1. Créer le modèle de table avec les bonnes colonnes
         String[] entetes = { "Id","Nom", "Prénom", "Date de naissance", "Sexe" };
-        DefaultTableModel model = new DefaultTableModel(entetes, 0) {
+        model = new DefaultTableModel(entetes, 0) {
             @Override
             public boolean isCellEditable(int row, int column) {
-                return false;  // lecture seule
+                return false;
             }
         };
 
-        // 2. Remplir le modèle avec les données de la mairie
-        List<Citoyen> liste = mairie.getCitoyens();  // méthode d’accès à la liste
+        table = new JTable(model);
+        table.setFillsViewportHeight(true);
+        JScrollPane scrollPane = new JScrollPane(table);
+
+        this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        this.setSize(500, 300);
+        this.setLocationRelativeTo(null);
+        this.add(scrollPane);
+
+        pack();
+        setLocationRelativeTo(null);
+        setVisible(true);
+
+        // Charge initialement la table
+        rafraichirTable();
+    }
+
+    // 🔁 Cette méthode met à jour la table à partir de la liste dans mairie
+    public void rafraichirTable() {
+        model.setRowCount(0);  // Vide la table
+        List<Citoyen> liste = mairie.getCitoyens();
         for (Citoyen c : liste) {
             Object[] ligne = {
-            	c.getId(),
+                c.getId(),
                 c.getNom(),
                 c.getPrenom(),
-                c.getDateNaiss().toString(),  // LocalDate -> String
+                c.getDateNaiss().toString(),
                 c instanceof model.Femme ? "Femme" : "Homme"
             };
             model.addRow(ligne);
         }
-
-        // 3. Instancier le JTable avec notre modèle
-        table = new JTable(model);
-        table.setFillsViewportHeight(true);
-
-        // 4. Mettre dans un JScrollPane
-        JScrollPane scrollPane = new JScrollPane(table);
-
-        // 5. Configurer la fenêtre (this), pas une nouvelle JFrame
-        this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        this.setSize(500, 300);
-        this.setLocationRelativeTo(null);  // centré
-        this.add(scrollPane);
-        
-        pack();
-        setLocationRelativeTo(null); // centre la fenêtre
-        setVisible(true);
     }
-
-   
 }

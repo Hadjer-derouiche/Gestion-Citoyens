@@ -14,24 +14,25 @@ import view.SaisiePView;
 
 public class MainContrl implements ActionListener  {
 	
-	
+	private AffichePView affichePView = null;
 	private Mairie mairie;
 
     public MainContrl(Mairie m) {
         mairie = m;
+         
     }
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		String command = e.getActionCommand();
 		 switch (command) {
 	        case "saisieP":
-	        	SaisiePView p=new SaisiePView(mairie);
+	        	new SaisiePView(mairie, affichePView);
 	            break;
 	        case "mariage":  
 	             new MariageView(mairie);
 	            break;
 	        case "naissance":
-	        	new NaissanceView(mairie);
+	        	new NaissanceView(mairie, affichePView);
 	            break;
 	        case "divorce":
 	        	new DivorceView(mairie);
@@ -43,7 +44,10 @@ public class MainContrl implements ActionListener  {
 	        	new DecesView(mairie);
 	            break;
 	        case "affichageP":
-	          new AffichePView(mairie);
+	        	if (affichePView == null) {
+	                affichePView = new AffichePView(mairie);
+	            }
+	            affichePView.setVisible(true);
 	          break;
 	        default:
 	            System.out.println("Interface inconnue");

@@ -9,14 +9,16 @@ import model.Citoyen;
 import model.Femme;
 import model.Homme;
 import model.Mairie;
+import view.AffichePView;
 
 public class NaissanceContrl implements ActionListener {
 	JTextField idP,idM,nom,prenom,dateNaiss;
 	JLabel erreur;
 	JRadioButton femme , homme;
 	private Mairie mairie;
+	private AffichePView affichePView;
 	
-	public NaissanceContrl (JTextField id1, JTextField id2, JTextField n,JTextField p ,JTextField d,JLabel r, Mairie m)
+	public NaissanceContrl (JTextField id1, JTextField id2, JTextField n,JTextField p ,JTextField d,JLabel r,JRadioButton f ,JRadioButton h, Mairie m,AffichePView view)
 	{
 		idP=id1;
 		idM=id2;
@@ -24,7 +26,10 @@ public class NaissanceContrl implements ActionListener {
 		prenom=p;
 		dateNaiss=d;
 		erreur=r;
+		femme=f;
+		homme=h;
 		mairie=m;
+		affichePView=view;
 	}
 	public void actionPerformed(ActionEvent e) {
 		String sNom  = nom.getText();
@@ -57,6 +62,9 @@ public class NaissanceContrl implements ActionListener {
 			mairie.ajouterCitoyen(newHomme);
 		    newActe= new ActeNaissance(pere,mere,newHomme);
 			
+		}
+		if (affichePView != null) {
+		    affichePView.rafraichirTable();
 		}
 		pere.ajouterEnfant(newActe);
 		mere.ajouterEnfant(newActe);

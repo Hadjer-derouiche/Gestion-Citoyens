@@ -38,7 +38,7 @@ public class SaisiePView extends JFrame {
 	        return maintenant.format(formatter);
 	    }
 
-	  public SaisiePView (Mairie m)
+	  public SaisiePView (Mairie m,AffichePView afficheView)
 	  {
 		  mairie=m;
 		  setPreferredSize(new Dimension(600,550));
@@ -101,7 +101,7 @@ public class SaisiePView extends JFrame {
 			
 			quitter.addActionListener(e -> dispose());
 		    
-			SaisiPContrl c= new SaisiPContrl(mairie,nom, prenom,dateNaissance, femme, homme);
+			SaisiPContrl c= new SaisiPContrl(mairie,nom, prenom,dateNaissance, femme, homme,afficheView);
 			ajouter.addActionListener(c);
 		
 

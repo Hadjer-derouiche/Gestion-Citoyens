@@ -1,6 +1,10 @@
 package view;
 
 import javax.swing.*;
+
+import controler.MariageContrl;
+import controler.NaissanceContrl;
+
 import java.awt.*;
 import model.ActeNaissance;
 import model.Mairie;
@@ -14,7 +18,7 @@ public class NaissanceView extends JFrame {
 
     JTextField jt1, jt2;
     JButton valider, quitter;
-    JLabel labelTitre, labelHomme, labelFemme, date;
+    JLabel labelTitre, labelHomme, labelFemme, date,erreur;
     JPanel mainPanel, formPanel, topPanel, bottomPanel;
     JTextField nom =new JTextField(15);
 	JTextField prenom =new JTextField(15);
@@ -30,11 +34,11 @@ public class NaissanceView extends JFrame {
         return maintenant.format(formatter);
     }
 
-    public NaissanceView (Mairie m) {
+    public NaissanceView (Mairie m,AffichePView afficheView) {
     	mairie=m;
         
         setTitle("Formulaire de Naissance");
-        setPreferredSize(new Dimension(600, 600));
+        setPreferredSize(new Dimension(600, 700));
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         getContentPane().setLayout(new BoxLayout(getContentPane(), BoxLayout.Y_AXIS));
 
@@ -54,7 +58,7 @@ public class NaissanceView extends JFrame {
         topPanel.add(Box.createHorizontalGlue());
 
         formPanel = new JPanel();
-        formPanel.setLayout(new GridLayout(5, 2, 20, 20));
+        formPanel.setLayout(new GridLayout(6, 2, 20, 20));
         formPanel.setBorder(BorderFactory.createEmptyBorder(30, 50, 30, 50));
 
         labelHomme = new JLabel("ID de pére :");
@@ -77,6 +81,8 @@ public class NaissanceView extends JFrame {
 		  formPanel.add(nom);
 		  formPanel.add(new JLabel("Prenomom : "));
 		  formPanel.add(prenom);
+		  formPanel.add(new JLabel("Date de naissance : "));
+		  formPanel.add(dateNaissance);
 		  formPanel.add(new JLabel("Sexe : "));
 		  JPanel sexePanel = new JPanel();
 		  sexePanel.add(r1);
@@ -105,13 +111,18 @@ public class NaissanceView extends JFrame {
 
         bottomPanel.add(valider);
         bottomPanel.add(quitter);
+        erreur=new JLabel();
 
         getContentPane().add(Box.createRigidArea(new Dimension(0, 20)));
         getContentPane().add(topPanel);
         getContentPane().add(Box.createRigidArea(new Dimension(0, 30)));
         getContentPane().add(formPanel);
+        getContentPane().add(erreur);
         getContentPane().add(bottomPanel);
         
+        
+        NaissanceContrl c= new NaissanceContrl(jt1,jt2,nom, prenom,dateNaissance,erreur,r1,r2,mairie,afficheView);
+      	valider.addActionListener(c);
         
         quitter.addActionListener(e -> dispose());
 
