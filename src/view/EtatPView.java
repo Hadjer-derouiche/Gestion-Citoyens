@@ -9,12 +9,14 @@ public class EtatPView extends JFrame {
 
     JTextField champID;
     JButton rechercher, quitter;
-    JLabel labelTitre, labelID, resultat;
+    JLabel labelTitre, labelID;
     JPanel topPanel, formPanel, bottomPanel;
+    JPanel resultatPanel;
+
 
     public EtatPView(Mairie mairie) {
         setTitle("État d'une personne");
-        setPreferredSize(new Dimension(500, 400));
+        setPreferredSize(new Dimension(550, 400));
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setLayout(new BoxLayout(getContentPane(), BoxLayout.Y_AXIS));
 
@@ -26,16 +28,21 @@ public class EtatPView extends JFrame {
         formPanel = new JPanel(new GridLayout(2, 2, 10, 10));
         labelID = new JLabel("ID de la personne :");
         champID = new JTextField(15);
-        resultat = new JLabel("");
-        resultat.setForeground(Color.black);
-        resultat.setFont(new Font("Arial", Font.BOLD,12));
+
+        resultatPanel = new JPanel();
+        resultatPanel.setLayout(new BoxLayout(resultatPanel, BoxLayout.Y_AXIS));
+
+        // Puis, crée un JScrollPane pour contenir resultatPanel
+        JScrollPane scrollPane = new JScrollPane(resultatPanel);
+        scrollPane.setPreferredSize(new Dimension(500, 200));
+
 
 
         formPanel.setBorder(BorderFactory.createEmptyBorder(20, 50, 20, 50));
         formPanel.add(labelID);
         formPanel.add(champID);
         formPanel.add(new JLabel("Résultat :"));
-        formPanel.add(resultat);
+        formPanel.add(resultatPanel);
 
         bottomPanel = new JPanel();
         rechercher = new JButton("Rechercher");
@@ -66,7 +73,7 @@ public class EtatPView extends JFrame {
 
         quitter.addActionListener(e -> dispose());
 
-        EtatPContrl controleur = new EtatPContrl(champID, resultat, mairie);
+        EtatPContrl controleur = new EtatPContrl(champID, resultatPanel, mairie);
         rechercher.addActionListener(controleur);
 
         pack();
